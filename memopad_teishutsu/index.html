@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memopad</title>
+    <link rel="resetcss" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+    integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+    crossorigin="anonymous"></script>
+    <script src="Sortable.js"></script>
+   
+</head>
+<body>
+<header>
+    <div>
+        <p1>＊重要情報は保存してはダメ</p1>
+        </div>
+    <h1 class="text-center">Post-It</h1>
+    
+</header>
+<main>
+    <body id=key></body>
+
+    <!-- ポストイット-->
+    <div class="ListWithHandle text-center">
+    <textarea id="memo" class="memo1"></textarea>
+    </div>
+    <!--  save と clear-->
+    <ul>
+        <li id="save">Save</li>
+        <li id="clear" onclick="clearText()">Clear</li>
+    </ul>
+    <div id="delete" class="text-center">Delete all</div>
+    
+</main>
+
+<table id="list" class="ListWithHandle02">
+    <!-- ここにポストイットが保存される -->
+</table>
+
+</body>
+
+<script>
+
+//1. save    
+
+
+let count = 0;
+
+$("#save").on('click',function(){
+    // id="key"の場所の入力欄
+    const key = $("key").val;
+
+    // id="memo"の場所の入力欄
+    const value = $("#memo").val();
+
+    // console.log(key)
+    // console.log(value)
+
+    // カウント
+    console.count();
+
+    localStorage.setItem(key,value);
+
+    //ポストイットを保管
+    const html =`
+    <div id="memo_record" class="memo1">
+        ${value}
+     </div>
+     `
+    $("#list").append(html); 
+    $("#memo").val("");
+    
+    //2枚目から色を変える
+    count = count+1;
+    // console.log(count);
+
+    if( (count % 4) == 1 ){
+        // console.log("2枚目");
+        
+        $("#memo").removeClass("memo1");
+        $("#memo").addClass("memo2");
+    } else if((count % 4) == 2){
+        // console.log("3枚目");
+        
+        $("#memo").removeClass("memo2");
+        $("#memo").addClass("memo3");
+    }　else if((count % 4) == 3){
+        // console.log("4枚目");
+        
+        $("#memo").removeClass("memo3");
+        $("#memo").addClass("memo4");
+    } else if((count % 4) == 0){
+        // console.log("5枚目");
+        
+        $("#memo").removeClass("memo4");
+        $("#memo").addClass("memo1");
+    }
+   
+});   
+
+//2. clear
+
+function clearText(){
+    var textForm = document.getElementById("memo");
+    textForm.value = '';
+}
+
+
+
+//3. delete all
+
+$("#delete").on('click', function(){
+    // alert(1);
+
+    localStorage.clear();
+    $("#list").empty();
+});
+
+//4.ページ読み込み：保存データ取得表示
+
+for(let i=0; i<localStorage.length; i++){
+    
+    
+    const key = localStorage.key(i);
+    const value = localStorage.getItem(key);
+
+    //メモ内容を表示
+    const html = 
+    `
+    <div id="memo_record>
+        ${value}
+     </div>
+     `;
+
+    //keyの値を取得
+
+    
+    $("#list").append(html);
+}
+
+//5. 保存したポストイットの色を合わせる
+
+// function Style(){
+// console.log(1);
+// $("#save").on('click',function(){
+//     $("#memo_record").removeClass("memo1");
+//     $("#memo_record").addClass("memo2");
+// }
+// )}
+
+// Style();
+
+
+const Style1 = function(){
+console.log(1);
+$("#save").on('click',function(){
+    $("#memo_record").removeClass("memo1");
+    $("#memo_record").addClass("memo2");
+}
+)}
+
+const Style2 = function(){
+console.log(2);
+$("#save").on('click',function(){
+    $("#memo_record").removeClass("memo1");
+    $("#memo_record").addClass("memo3");
+}
+)}
+
+const Style3 = function(){
+console.log(3);
+$("#save").on('click',function(){
+    $("#memo_record").removeClass("memo1");
+    $("#memo_record").addClass("memo4");
+}
+)}
+
+const Style4 = function(){
+console.log(4);
+$("#save").on('click',function(){
+    $("#memo_record").removeClass("memo1");
+    $("#memo_record").addClass("memo1");
+}
+)}
+
+var style1 = Style1();
+var style2 = Style2();
+var style3 = Style3();
+var style4 = Style4();
+
+ic=1;
+function setMemoColor() {
+ic=-1*ic;
+if ( ic == -1 ) {
+    this.class=style1;
+   
+} else if ( ic == 0) {
+    this.class=style2;
+
+} else if (ic == 1) {
+    this.class=style3;
+
+} else if (ic == 2) {
+    this.class=style4;
+
+}
+
+}
+window.onload = function() {
+var tdTag = document.getElementsByClassName("memo01");
+for (var i=0; i<tdTag.length; i++){
+
+tdTag[i].onClick = setMemoColor;
+}
+}
+
+  
+
+
+// for(let i=0; i<localStorage.length; i++){
+    
+//     const key = localStorage.key(i);
+//     // const MemoStyle = Style(i);
+//     //2枚目
+//     if(key===0){
+//         alert(1);
+//         Style1();
+//     }
+// }
+
+
+// const memoStyle = function(){
+
+//     $("#memo_record").removeClass("memo1");
+//     $("#memo_record").addClass("memo2");
+// }
+
+// const memoStyle02 = function(){
+
+// $("#memo_record").removeClass("memo2");
+// $("#memo_record").addClass("memo3");
+// }
+
+// const memoStyle03 = function(){
+
+// $("#memo_record").removeClass("memo3");
+// $("#memo_record").addClass("memo4");
+// }
+
+// const memoStyle04 = function(){
+
+// $("#memo_record").removeClass("memo4");
+// $("#memo_record").addClass("memo1");
+// }
+
+// const call = (callback) => {
+//   console.log("コールバック関数を呼び出します。");
+//   callback();
+// };
+
+// memoStyle02();
+
+// for(let i=0; i<20; i++){
+//     // console.log(i);
+//     //2枚目
+    
+//     alert(1); 
+//     const memoStyle = memo[i];
+
+
+//     $("#save").on('click',function(){
+//     $("#memo_record").removeClass("memo1");
+//     $("#memo_record").addClass("memo2");
+
+//     });
+// };
+
+
+
+
+// let memoStyle = [memo1, memo2, memo3, memo4];
+
+// for(let i=0; i<localStorage.length; i++){
+    
+// //2枚目
+// if( (i === 1 )){
+//     alert(1); 
+//     $("#save").on('click',function(){
+//     $("#memo_record").removeClass("memo1");
+//     $("#memo_record").addClass("memo2");
+
+//     });
+// };
+// }
+
+  
+
+
+// for(let i=0; i<localStorage.length; i++){
+    
+//     // 2枚目
+//     if( (i == 1 )){
+//         console.log("2枚目"); 
+        
+//     };
+// }
+
+// console.log(localStorage.length);
+
+// 　
+// if(localStorage.length == 2){
+    
+//     $("#memo_record").removeClass("memo1");
+//     $("#memo_record").addClass("memo2");
+// }
+
+// let num = localStorage.Length;
+
+
+//     if(num==1){
+//         console.log("2枚目");
+//         // $("#memo_record").removeClass("memo1");
+//         // $("#memo_record").addClass("memo2");
+//         }
+
+
+
+// for(let i=0; i<localStorage.length; i++){
+    
+//     // 2枚目
+//     if( (i == 1 )){
+//         console.log("2枚目"); 
+//         $("#memo_record").removeClass("memo1");
+//         $("#memo_record").addClass("memo2");
+//     };
+// }
+    // //2枚目
+    // if( ($i == 1 )){
+    //     console.log("2枚目");   
+    //     $("#memo_record").addClass("memo2");
+    // };
+    
+   
+    
+//      //3枚目
+//     if( ($i % 4) == 0 ){
+//         console.log("3枚目");
+//         $("#save").on('click',function(){
+//         $("#memo").removeClass("memo2");
+//         $("#memo").addClass("memo3");
+//     });
+//     }
+//     //4枚目
+//     if( ($i % 5) == 0 ){
+//         console.log("4枚目");
+//         $("#save").on('click',function(){
+//         $("#memo").removeClass("memo3");
+//         $("#memo").addClass("memo4");
+//     });
+//     }
+// }
+
+// for(let i=0; i<30; i++){
+//     if(i%1 == 0){
+//         console.log("1で割り切れる");
+//     }
+//     if(i%2 == 0){
+//         console.log("2で割り切れる");
+//     }
+//     if(i%3 == 0){
+//         console.log("3で割り切れる");
+//     }
+// }
+
+// for($i= 1; $i<= 12; $i++){
+//     if( ($i % 3) == 0 ){
+//     $("#save").on('click',function(){
+//     $("#memo").removeClass("memo2");
+//     $("#memo").addClass("memo3");
+// });   
+// }}
+
+// $("#save").on('click',function(){
+//     // alert(1);
+
+//     {
+//     $("#memo").removeClass("memo1");
+//     $("#memo").addClass("memo2");
+//     }
+// });   
+
+
+// $("save").on('click', function(){
+//     alert(1);
+//     $memo.element.removeClass('memo1');
+//     $memo.element.addClass('memo2');
+
+// });
+
+// ↑ <p class="class4"> となる
+
+// document.getElementById('memo').addEventListener('click',function(){
+//   //要素の取得 → 背景色を変える
+//   document.getElementById('memo').style.background='pink';
+// });
+
+
+// function checkInputCondition(target){
+//   const key = localStorage.key(i);
+//   // nameは"d1"などのinputタグのname属性
+//   var memo = target.memo;
+//   // nameごとに処理を帰る想定で
+//   switch (memo){
+//     //d1の場合
+//     case 'd1':
+//     // isNaN() は数値じゃないものにtrue
+//     // value >= 100は100以上ならtrue
+//     // 下の文はどちらかの条件を満たした場合
+//     if (i >= 0){
+//       // inputタグの文字色を変える
+//       target.style.backgroundColor = "#e60000";
+//     }
+//     }
+//   }
+
+
+
+
+//付箋をドラッグアンドドロップ
+ 
+$(function() {
+
+Sortable.create($('.ListWithHandle')[0]);
+
+});
+
+$(function() {
+
+Sortable.create($('.ListWithHandle02')[0]);
+
+});
+
+let sortable = Sortable.create(memo_record, {
+    group: "memo_record",
+    animation: 100
+});
+
+//付箋を削除機能
+
+
+
+// var editableList = Sortable.create(fusen, {
+ 
+//   filter: ".js-remove",
+//   onAdd: function (evt) {
+//     var el = editableList.closest(evt.item);
+//     el.innerHTML += '<i class="js-remove">✖</i>';
+//   },
+//   onFilter: function (evt) {
+//     var el = editableList.closest(evt.item);
+//     var memo_record = document.getElementById("memo_record");
+//     var removeBtn = document.querySelector("#fusen li .js-remove");
+//     el.removeChild(removeBtn);
+//     el && el.parentNode.removeChild(el);
+//     memo_record.appendChild(el);
+//   },
+//   animation: 100,
+// });
+
+</script>
+</html>

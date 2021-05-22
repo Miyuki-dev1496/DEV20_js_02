@@ -1,0 +1,107 @@
+@charset "utf-8";
+
+
+html{
+    font-size: 90.0%;/* 16px x 62.5% = 10px*/
+}
+
+.text-center{
+    text-align : center;
+}
+
+body {
+    font-family: "Meiryo UI" ;
+    }
+
+h1{
+    font-family:"Comic Sans MS";
+    font-size: 2.6rem;
+    color: coral;
+}
+
+p1{
+    font-size: 0.6rem;
+    color: red
+}
+
+.memo1{
+    width: 16.5rem;
+    height: 14rem;
+    padding: 1.5em;
+    overflow: hidden;
+    box-shadow: 0 .25rem .25rem hsla(0, 0%, 0%, .1);
+    background-image:
+        linear-gradient(180deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
+    , linear-gradient(180deg, hsla(200, 100%, 85%, 1), hsla(200, 100%, 85%, 1));
+    font-size: 1.125rem;
+    line-height: 1.8;
+}
+
+.memo2{
+    width: 16.5rem;
+    height: 14rem;
+    padding: 1.5em;
+    overflow: hidden;
+    box-shadow: 0 .25rem .25rem hsla(0, 0%, 0%, .1);
+    background-image:
+        linear-gradient(180deg, hsla(0, 0%, 45%, .1) 2rem, rgba(0, 100, 100, 0) 2.5rem)
+    , linear-gradient(180deg, rgb(255, 179, 251), rgb(235, 158, 231));
+    font-size: 1.125rem;
+    line-height: 1.8;
+}
+
+.memo3{
+    width: 16.5rem;
+    height: 14rem;
+    padding: 1.5em;
+    overflow: hidden;
+    box-shadow: 0 .25rem .25rem hsla(0, 0%, 0%, .1);
+    background-image:
+        linear-gradient(180deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
+    , linear-gradient(180deg, rgb(241, 255, 179), rgb(250, 255, 179));
+    font-size: 1.125rem;
+    line-height: 1.8;
+}
+
+.memo4{
+    width: 16.5rem;
+    height: 14rem;
+    padding: 1.5em;
+    overflow: hidden;
+    box-shadow: 0 .25rem .25rem hsla(0, 0%, 0%, .1);
+    background-image:
+        linear-gradient(180deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
+    , linear-gradient(180deg, rgb(179, 255, 183), rgb(155, 252, 155));
+    font-size: 1.125rem;
+    line-height: 1.8;
+}
+
+.memo__record{
+    width: 16.5rem;
+    height: 14rem;
+    padding: 1.5em;
+    overflow: hidden;
+    box-shadow: 0 .25rem .25rem hsla(0, 0%, 0%, .1);
+    background-image:
+        linear-gradient(180deg, hsla(0, 0%, 45%, .1) 2rem, hsla(0, 100%, 100%, 0) 2.5rem)
+    , linear-gradient(180deg, hsla(200, 100%, 85%, 1), hsla(200, 100%, 85%, 1));
+    font-size: 1.125rem;
+    line-height: 1.8;
+    display :flex
+}
+
+ul{
+    text-align:center;
+}
+
+li{
+    display:inline;
+    margin-right: 30px;
+}
+
+#list{
+    display:flex;
+    flex-wrap:wrap;
+    align-content: space-between;
+}
+
